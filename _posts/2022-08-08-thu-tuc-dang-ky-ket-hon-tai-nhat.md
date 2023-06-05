@@ -137,5 +137,6 @@ Các bước gửi hồ sơ qua đường bưu điện sẽ giống như lúc l�
 ## **----------------- END ------------------**
 
 
-> *Trong quá trình tìm hiểu giấy tờ đăng ký kết hôn thì mình có tham khảo rất nhiều từ bạn mình, đây là blog của bạn ý, rất chi tiết và đẩy đủ*
- https://sunshinegirlsjournal.wordpress.com/2019/03/09/ho-so-dang-ky-ket-hon-tai-nhat/
+> *Trong quá trình tìm hiểu giấy tờ đăng ký kết hôn thì mình có tham khảo rất nhiều từ bạn mình, đây là blog của bạn ý, rất chi tiết và đẩy đủ:*
+
+> https://sunshinegirlsjournal.wordpress.com/2019/03/09/ho-so-dang-ky-ket-hon-tai-nhat/
