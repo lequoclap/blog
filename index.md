@@ -1,4 +1,4 @@
 ---
-title: Welcome to my blog, hope this will be helpful for you
+title: Welcome to my blog, hope you enjoy reading it
 ---
 
