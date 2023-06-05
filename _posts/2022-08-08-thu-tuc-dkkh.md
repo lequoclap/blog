@@ -10,7 +10,7 @@ Mình và vợ (người Hàn) đã đăng ký kết hôn vào tháng 8/2022 t�
 
 Do đó mình sẽ tổng hợp lại các bước ở đây để nếu có bạn Việt Nam nào muốn đăng ký kết hôn với partner là người nước ngoài tại Nhật có thể tham khảo.
 
-(Ở đây mình sẽ chỉ đề cập đến giấy tờ và thủ tục cần thiết ở phía mình - người Việt, vì tùy vào quốc tịch của partner của bạn thì thủ tục sẽ có khác 1 xíu, mình khuyến khích các bạn nên lên 区s・市役所　để consult các loại giấy tờ cần thiết)
+(Ở đây mình sẽ chỉ đề cập đến giấy tờ và thủ tục cần thiết ở phía mình - người Việt, vì tùy vào quốc tịch của partner của bạn thì thủ tục sẽ có khác 1 xíu, mình khuyến khích các bạn nên lên 区・市役所　để consult các loại giấy tờ cần thiết)
 
 Về thứ tự các bước sẽ như sau:
 
