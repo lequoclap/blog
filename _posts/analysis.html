@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Holistic Performance Synthesis — Lap Le (2025-11-08)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <style>
+    :root{
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --ink: #0f172a;
+      --muted: #475569;
+      --soft: #e2e8f0;
+      --accent: #2563eb;
+      --accent-2: #10b981;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --green: #22c55e;
+      --purple: #8b5cf6;
+      --blue: #3b82f6;
+      --shadow: 0 10px 30px rgba(15,23,42,0.08);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --gap: 18px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg: #0b0f18;
+        --card: #111827;
+        --ink: #e5e7eb;
+        --muted: #9aa3af;
+        --soft: #243043;
+        --shadow: 0 10px 30px rgba(0,0,0,0.45);
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a{color:var(--accent); text-decoration:none}
+    h1{font-weight:800; font-size: clamp(1.6rem, 2.6vw, 2.2rem); letter-spacing: -0.02em; margin:0}
+    h2{font-weight:800; font-size: clamp(1.2rem, 2vw, 1.6rem); letter-spacing:-0.01em; margin:0 0 6px}
+    h3{font-weight:700; font-size: clamp(1rem, 1.6vw, 1.25rem); margin:0 0 6px}
+    p{margin:6px 0 0}
+    small, .small{font-size: 0.88rem; color: var(--muted)}
+    .muted{color:var(--muted)}
+    .caps{letter-spacing:0.08em; text-transform:uppercase; font-weight:700; font-size:0.75rem; color:var(--muted)}
+    .tag{
+      display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:var(--soft); color:var(--muted); font-weight:700; font-size:0.8rem;
+    }
+    .badge{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:linear-gradient(90deg, rgba(37,99,235,0.14), rgba(16,185,129,0.14)); color:var(--ink); font-weight:700}
+    .grid{display:grid; gap: var(--gap)}
+    .grid.cols-2{grid-template-columns: repeat(2, minmax(0,1fr))}
+    .grid.cols-3{grid-template-columns: repeat(3, minmax(0,1fr))}
+    .grid.auto{grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))}
+    @media (max-width: 980px){
+      .grid.cols-2, .grid.cols-3{grid-template-columns: 1fr}
+    }
+    .page{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    header.mast{
+      position: relative;
+      border-radius: 18px;
+      padding: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(1200px 200px at 10% -20%, rgba(37,99,235,0.25), transparent),
+        radial-gradient(900px 200px at 90% 0%, rgba(16,185,129,0.18), transparent),
+        linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.55));
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(99,102,241,0.08);
+    }
+    @media (prefers-color-scheme: dark){
+      header.mast{
+        background:
+          radial-gradient(1200px 200px at 10% -20%, rgba(37,99,235,0.25), transparent),
+          radial-gradient(900px 200px at 90% 0%, rgba(16,185,129,0.18), transparent),
+          linear-gradient(180deg, rgba(17,24,39,0.9), rgba(17,24,39,0.6));
+        border-color: rgba(255,255,255,0.05);
+      }
+    }
+    .mast-top{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap}
+    .mast-title{display:flex; align-items:flex-start; gap:12px; flex-wrap:wrap}
+    .mast-title .sub{display:flex; align-items:center; gap:10px}
+    .mast-stats{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end
+    }
+    .chip{
+      display:flex; flex-direction:column; gap:4px; padding:10px 12px; border-radius:12px;
+      background: var(--card); border:1px solid rgba(0,0,0,0.06); min-width: 120px; box-shadow: var(--shadow);
+    }
+    @media (prefers-color-scheme: dark){
+      .chip{border-color: rgba(255,255,255,0.06)}
+    }
+    .k{font-size: 0.8rem; color: var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:0.06em}
+    .v{font-weight:800; font-size:1.1rem}
+    .chip .bar{
+      height:8px; background:var(--soft); border-radius:999px; overflow:hidden;
+    }
+    .chip .bar > i{display:block; height:100%; background: var(--accent);}
+    .chip.status-amber .v{color:var(--amber)}
+    .chip.status-good .v{color:var(--green)}
+    .chip.status-warn .v{color:var(--red)}
+    .divider{height:1px; background:var(--soft); margin:12px 0}
+    section.block{
+      background: var(--card); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); border:1px solid rgba(0,0,0,0.06)
+    }
+    @media (prefers-color-scheme: dark){
+      section.block{border-color: rgba(255,255,255,0.06)}
+    }
+    .subtle{opacity:0.95}
+    /* Context mode switcher */
+    .modes{
+      margin-top: 18px; display:flex; align-items:center; gap:8px; flex-wrap:wrap
+    }
+    .mode{
+      position: relative;
+      border-radius: 999px; overflow:hidden;
+      display:inline-grid; grid-auto-flow:column; gap:2px; background:var(--soft); padding:3px;
+    }
+    .mode input{display:none}
+    .mode label{
+      cursor:pointer; padding:8px 12px; border-radius:999px; font-weight:700; color:var(--muted); user-select:none;
+      display:flex; align-items:center; gap:8px;
+    }
+    .mode input:checked + label{
+      color:#fff; background: linear-gradient(90deg, var(--accent), var(--purple)); box-shadow: var(--shadow);
+    }
+    /* Contextual hierarchy */
+    .context{display:none}
+    #mode-glance:checked ~ main .context-glance{display:block}
+    #mode-plan:checked   ~ main .context-plan{display:block}
+    #mode-evidence:checked ~ main .context-evidence{display:block}
+    /* Quick actions layout */
+    .callout{
+      border-left: 6px solid var(--accent);
+      border-radius: 12px; padding: 14px 14px 14px 16px; background: linear-gradient(180deg, rgba(37,99,235,0.08), transparent);
+    }
+    .callout.warn{border-left-color: var(--amber); background: linear-gradient(180deg, rgba(245,158,11,0.10), transparent)}
+    .callout.danger{border-left-color: var(--red); background: linear-gradient(180deg, rgba(239,68,68,0.10), transparent)}
+    .icon{font-size:1.1rem}
+    /* Bars and visual systems */
+    .bullet{
+      position: relative; height: 14px; background: var(--soft); border-radius: 999px; overflow:hidden; margin-top:8px
+    }
+    .bullet .fill{position:absolute; left:0; top:0; bottom:0; background: linear-gradient(90deg, var(--accent), var(--purple))}
+    .bullet .target{
+      position:absolute; top:0; bottom:0; background: repeating-linear-gradient(45deg, rgba(16,185,129,0.35), rgba(16,185,129,0.35) 8px, rgba(16,185,129,0.15) 8px, rgba(16,185,129,0.15) 16px);
+    }
+    .legend{display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-top:8px}
+    .dot{width:10px; height:10px; border-radius:50%; display:inline-block}
+    .dot.red{background:var(--red)} .dot.amber{background:var(--amber)} .dot.green{background:var(--green)} .dot.blue{background:var(--blue)} .dot.purple{background:var(--purple)} .dot.gray{background:var(--muted)}
+    .stack{
+      height: 14px; border-radius: 999px; overflow:hidden; display:flex; background: var(--soft)
+    }
+    .stack span{height:100%}
+    .stack .vig{background: var(--red)}
+    .stack .mod{background: var(--amber)}
+    .stack .light{background: linear-gradient(45deg, rgba(59,130,246,0.85), rgba(59,130,246,0.6))}
+    /* Timeline */
+    .timeline{position:relative; padding-left:10px}
+    .timeline:before{
+      content:""; position:absolute; left:6px; top:0; bottom:0; width:2px; background: var(--soft);
+    }
+    .t-item{
+      position:relative; margin-left:14px; padding: 8px 12px; background: var(--card); border:1px solid rgba(0,0,0,0.06);
+      border-radius: 10px; box-shadow: var(--shadow); margin-bottom:10px
+    }
+    .t-item:before{
+      content:""; position:absolute; left:-11px; top:14px; width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px var(--bg);
+    }
+    .t-item.spike:before{background: var(--red)}
+    .t-item.deload:before{background: var(--green)}
+    /* Table */
+    table{width:100%; border-collapse: collapse; overflow:hidden; border-radius:10px; margin-top:10px}
+    th, td{padding:10px 12px; border-bottom:1px solid rgba(0,0,0,0.06); text-align:left; vertical-align:top}
+    th{background:linear-gradient(180deg, rgba(148,163,184,0.18), rgba(148,163,184,0.06)); font-size:0.85rem; letter-spacing:0.03em; text-transform:uppercase}
+    tr:hover td{background: rgba(148,163,184,0.06)}
+    @media (prefers-color-scheme: dark){
+      th, td{border-color: rgba(255,255,255,0.06)}
+      th{background: linear-gradient(180deg, rgba(148,163,184,0.16), rgba(148,163,184,0.04))}
+      tr:hover td{background: rgba(148,163,184,0.06)}
+    }
+    /* Details */
+    details{border:1px dashed rgba(148,163,184,0.6); border-radius:12px; padding:12px; background:linear-gradient(180deg, rgba(148,163,184,0.08), transparent)}
+    details + details{margin-top:12px}
+    summary{cursor:pointer; font-weight:800}
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:" ⌄"; color:var(--muted)}
+    details[open] summary:after{content:" ⌃"}
+    /* Sticky nav */
+    .subnav{
+      position: sticky; top: 8px; z-index: 9; background: transparent; margin-top: 12px;
+    }
+    .subnav .row{
+      display:flex; gap:6px; flex-wrap:wrap; background: var(--card); padding:6px; border-radius:999px; box-shadow: var(--shadow); border:1px solid rgba(0,0,0,0.06)
+    }
+    .subnav a{
+      padding:8px 12px; border-radius:999px; color: var(--muted); font-weight:700
+    }
+    .subnav a:hover{background: var(--soft); color:var(--ink)}
+    /* Footer note */
+    footer{color:var(--muted); font-size:0.9rem; margin-top:18px}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="mast">
+      <div class="mast-top">
+        <div class="mast-title">
+          <h1>Holistic Performance Synthesis — Lap Le</h1>
+          <div class="sub">
+            <span class="tag">Date: 2025-11-08</span>
+            <span class="badge">Events: Tamagawa Half (B) · 2025-12-07 • Danang 70.3 (A) · 2026-05-10</span>
+          </div>
+        </div>
+        <div class="mast-stats">
+          <div class="chip">
+            <div class="k">📊 ACWR</div>
+            <div class="v">0.8 <span class="small muted">mild under-load</span></div>
+            <div class="bar"><i style="width:53%"></i></div>
+            <small class="muted">Target band 0.95–1.05</small>
+          </div>
+          <div class="chip">
+            <div class="k">📊 Chronic Load</div>
+            <div class="v">558 a.u. <span class="small muted">peak 597</span></div>
+            <div class="bar"><i style="width:93%"></i></div>
+            <small class="muted">+13.4% from 492</small>
+          </div>
+          <div class="chip status-good">
+            <div class="k">📊 HM Readiness</div>
+            <div class="v">74/100</div>
+            <div class="bar"><i style="width:74%; background:var(--green)"></i></div>
+            <small class="muted">Half marathon</small>
+          </div>
+          <div class="chip status-amber">
+            <div class="k">📊 Physiology</div>
+            <div class="v">64/100 <span class="small muted">amber</span></div>
+            <div class="bar"><i style="width:64%; background:var(--amber)"></i></div>
+            <small class="muted">HRV 71 ms · RHR 55 bpm</small>
+          </div>
+          <div class="chip">
+            <div class="k">📊 AQS</div>
+            <div class="v">77/100</div>
+            <div class="bar"><i style="width:77%; background:var(--blue)"></i></div>
+            <small class="muted">Execution quality</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="grid auto">
+        <div class="callout warn">
+          <strong>System synthesis:</strong> load-tolerant but recovery-sensitive. Keep a tight leash on variability and intensity density; build only when physiology is green.
+        </div>
+        <div class="grid cols-2">
+          <div>
+            <div class="caps">ACWR posture</div>
+            <div class="bullet" aria-label="ACWR bullet graph">
+              <div class="target" style="left:63.3%; width:6.7%"></div>
+              <div class="fill" style="width:53.3%"></div>
+            </div>
+            <div class="legend">
+              <span class="small muted">0.0</span>
+              <span class="small muted" style="margin-left:auto">1.5 cap</span>
+              <span class="tag" title="Sweet spot 0.95–1.05">🎯 Target zone</span>
+            </div>
+          </div>
+          <div>
+            <div class="caps">Intensity density (last 10 TD · 10h 27m)</div>
+            <div class="stack" role="img" aria-label="Intensity mix 52% vigorous, 38% moderate, 10% light">
+              <span class="vig" style="width:52%"></span>
+              <span class="mod" style="width:38%"></span>
+              <span class="light" style="width:10%"></span>
+            </div>
+            <div class="legend">
+              <span><i class="dot red"></i> Vigorous 52% (326 min)</span>
+              <span><i class="dot amber"></i> Moderate 38% (240 min)</span>
+              <span><i class="dot blue"></i> Light/Unclassified 10% (~61 min)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modes" aria-label="Context mode">
+        <span class="caps">Context</span>
+        <div class="mode">
+          <input type="radio" name="mode" id="mode-glance" checked>
+          <label for="mode-glance">Glance</label>
+          <input type="radio" name="mode" id="mode-plan">
+          <label for="mode-plan">Plan</label>
+          <input type="radio" name="mode" id="mode-evidence">
+          <label for="mode-evidence">Evidence</label>
+        </div>
+      </div>
+    </header>
+
+    <nav class="subnav" aria-label="Quick navigation">
+      <div class="row">
+        <a href="#glance">Glance</a>
+        <a href="#plan">Plan</a>
+        <a href="#kpi">KPI</a>
+        <a href="#patterns">Patterns</a>
+        <a href="#linkages">Linkages</a>
+        <a href="#timeline">Race Timeline</a>
+        <a href="#guidance">Guidance</a>
+        <a href="#bottom-line">Bottom Line</a>
+      </div>
+    </nav>
+
+    <main>
+      <!-- GLANCE -->
+      <section id="glance" class="context context-glance block">
+        <h2>🎯 What to do today (Pre‑workout glance)</h2>
+        <div class="grid auto">
+          <div class="callout">
+            <h3>Decision gate</h3>
+            <p>
+              Proceed with run‑leaning build only on green signals:
+              <strong>HRV ≥ 71 ms</strong>, <strong>RHR ≤ 52 bpm</strong>, <strong>Deep sleep ≥ 1.0 h</strong>, <strong>Total sleep ≥ 7.2 h</strong>.
+            </p>
+            <p class="small muted">Today’s snapshot: Physiology 64/100 (amber); HRV 71 ms; RHR 55 bpm; deep 0.60 h last night → bias aerobic/technique.</p>
+          </div>
+          <div class="callout warn">
+            <h3>Variability + intensity</h3>
+            <p>14‑day acute CV ≈ 20% (target 10–15%). Intensity density high at 52% vigorous; avoid vigorous‑dominant doubles today.</p>
+          </div>
+        </div>
+
+        <div class="grid cols-3" style="margin-top:10px">
+          <div class="chip">
+            <div class="k">📊 Load posture</div>
+            <div class="v">ACWR 0.8</div>
+            <small class="muted">Mild under‑load; room to nudge toward 0.95–1.05.</small>
+          </div>
+          <div class="chip">
+            <div class="k">📊 Chronic capacity</div>
+            <div class="v">558 a.u.</div>
+            <small class="muted">Near peak (597) → supports small build.</small>
+          </div>
+          <div class="chip status-amber">
+            <div class="k">📊 Sleep & HR</div>
+            <div class="v">Deep 0.60 h · RHR 55</div>
+            <small class="muted">Green‑light threshold not met → keep it aerobic.</small>
+          </div>
+        </div>
+
+        <details style="margin-top:12px">
+          <summary>💡 Suggested session choices (if amber vs green)</summary>
+          <div class="grid auto" style="margin-top:10px">
+            <div class="block subtle">
+              <h3>Amber day (today‑like)</h3>
+              <ul>
+                <li>Run: Aerobic maintenance 35–55 min, extend recoveries to ensure HR reset; keep on‑pace conservative.</li>
+                <li>Bike: Steady aerobic 45–60 min at 100–130 W band.</li>
+                <li>Swim: Technique set with continuous 6–10 × 100 m @ 3:05–3:15, controlled rests.</li>
+                <li>Recovery: No stacking hard sessions after high‑stress days.</li>
+              </ul>
+            </div>
+            <div class="block subtle">
+              <h3>Green day</h3>
+              <ul>
+                <li>Run: Aerobic tempo 20–30 min OR 2:00 on / 2:00–3:00 off intervals; verify HR reset within recoveries.</li>
+                <li>Bike: 1 quality interval session (like 11/06) this week.</li>
+                <li>Swim: Progress to 150–200 m repeats as tolerance allows.</li>
+                <li>Hydration: Log pre/post and during to close sleep–RHR loop.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- PLAN -->
+      <section id="plan" class="context context-plan block">
+        <h2>🎯 Short-range plan (Next 2–3 weeks)</h2>
+        <div class="grid auto">
+          <div class="block subtle">
+            <h3>🔍 Load targets and variability control</h3>
+            <ul>
+              <li>Build window (next 10–14 days): Move ACWR toward 0.95–1.05 by raising weekly acute from ~495 → ~558 a.u., distributed evenly to target 14‑day CV ≈ 10–15%.</li>
+              <li>Spike control: Cap ACWR ≤ 1.2 during build; avoid single‑day surges that could push weekly ACWR > 1.3.</li>
+              <li>Taper window (final 7–10 days pre‑race): Drift to ACWR ~0.85–0.90 while keeping chronic ≥ ~537 a.u. (≥90% of recent max).</li>
+            </ul>
+            <div class="bullet" title="ACWR now vs 1.5 cap">
+              <div class="target" style="left:63.3%; width:6.7%"></div>
+              <div class="fill" style="width:53.3%"></div>
+            </div>
+            <small class="muted">🎯 Target zone 0.95–1.05 (green band).</small>
+          </div>
+
+          <div class="block subtle">
+            <h3>🔍 Run emphasis (aligned to physiology)</h3>
+            <ul>
+              <li>On green days only: Add modest run‑specific quality (tempo 20–30 min, or 2:00 on / 2:00–3:00 off), stay within ACWR bounds.</li>
+              <li>On base/amber days: Ensure recovery clarity—extend recoveries or slightly temper on‑pace when HR does not reset within 2:00 (as seen on 11/07).</li>
+            </ul>
+          </div>
+
+          <div class="block subtle">
+            <h3>🔍 Bike and swim focus</h3>
+            <ul>
+              <li>Bike: Maintain one interval session (like 11/06) + one steady aerobic ride (45–75 min at 100–130 W) to support base without inflating variability.</li>
+              <li>Swim: Consolidate drill‑heavy micro segments into continuous repeats (6–10 × 100 m @ ~3:05–3:15), progress to 150–200 m repeats as tolerance allows.</li>
+            </ul>
+          </div>
+
+          <div class="block subtle">
+            <h3>🔍 Recovery gating and monitoring</h3>
+            <ul>
+              <li>Session gating: Reintroduce threshold/long work when HRV ≥ 71 ms, RHR ≤ 52 bpm, deep sleep ≥ 1.0 h, total sleep ≥ 7.2 h.</li>
+              <li>Stress-aware scheduling: Avoid stacking key sessions immediately after high‑stress days (e.g., a day like 11/07).</li>
+              <li>Hydration logging: Improve recording on key training days to tighten the hydration–RHR–sleep feedback loop (current logs incomplete).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- EVIDENCE -->
+      <section class="context context-evidence block" id="evidence">
+        <h2>🔍 Evidence and analysis</h2>
+
+        <section class="block subtle">
+          <h3>Executive Summary</h3>
+          <ul>
+            <li>Load architecture is wave-based and deliberate: two “shock” exposures (ACWR = 1.5 on 2025-09-27 and 2025-10-23) consistently followed by deloads (ACWR 0.6–0.7), yielding a net chronic load rise (+13.4% from 492 to 558; peak 597).</li>
+            <li>Current status favors a small build: ACWR 0.8 (mildly under target) with chronic near peak (558), 14-day acute CV ≈ 20%. Metrics Readiness Score for the half marathon = 74/100.</li>
+            <li>Performance adaptations are modality-specific: cycling VO2 max improved from 44 → 46; running VO2 max is flat at 44 across all entries.</li>
+            <li>Execution quality is solid (Activity Quality Score 77/100) with clean structure on both run and bike. However, intensity density is high (≈52% of time vigorous across last 10 training days), and several days include vigorous-dominant doubles.</li>
+            <li>Physiology readiness is amber (64/100): average HRV sits at the low edge of balanced (71 ms), RHR is +3 vs baseline (55 bpm vs 52), and deep sleep is suppressed (0.60 h last night; 0.76 h 7-day average). Stress is volatile (11/7 high; 11/8 low).</li>
+            <li>Synthesis: The system is “load-tolerant but recovery-sensitive.” A short, run-leaning build is supported by the metrics but should be gated by physiology (proceed on “green” signals only) and with tighter control of day-to-day variability and intensity density.</li>
+          </ul>
+        </section>
+
+        <section id="kpi" class="block subtle">
+          <h3>📊 Key Performance Indicators (KPI)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Domain</th>
+                <th>KPI</th>
+                <th>Current/Recent</th>
+                <th>Range/Trend</th>
+                <th>Source/Evidence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="4"><strong>Load</strong></td>
+                <td>Acute load</td>
+                <td>495 a.u. (2025-11-08)</td>
+                <td>320–919 a.u. historical</td>
+                <td>Metrics</td>
+              </tr>
+              <tr>
+                <td>Chronic load</td>
+                <td>558 a.u. (near recent peak 597)</td>
+                <td>+66 vs 2025-09-13 (+13.4%)</td>
+                <td>Metrics</td>
+              </tr>
+              <tr>
+                <td>ACWR</td>
+                <td>0.8 (mild under-load)</td>
+                <td>Spikes 1.5 (09/27, 10/23); deloads 0.6–0.7</td>
+                <td>Metrics</td>
+              </tr>
+              <tr>
+                <td>14-day acute CV</td>
+                <td>≈20%</td>
+                <td>Acute mean ≈565; SD ≈115</td>
+                <td>Metrics</td>
+              </tr>
+              <tr>
+                <td rowspan="2"><strong>Fitness</strong></td>
+                <td>VO2 max (Run)</td>
+                <td>44</td>
+                <td>17/17 entries at 44 (09/12–11/07)</td>
+                <td>Metrics</td>
+              </tr>
+              <tr>
+                <td>VO2 max (Bike)</td>
+                <td>46</td>
+                <td>Improved from 44 → 46 (10/12–11/06)</td>
+                <td>Metrics</td>
+              </tr>
+              <tr>
+                <td rowspan="2"><strong>Execution</strong></td>
+                <td>Activity Quality Score (EQ)</td>
+                <td>77/100</td>
+                <td>Daily EQ 6–9 (last 10 training days)</td>
+                <td>Activity</td>
+              </tr>
+              <tr>
+                <td>Intensity mix (last 10 TD; 10h 27m)</td>
+                <td>Vigorous 326 min (52%); Moderate 240 min (38%)</td>
+                <td>Light/unclassified ≈61 min (10%)</td>
+                <td>Activity</td>
+              </tr>
+              <tr>
+                <td rowspan="5"><strong>Physiology</strong></td>
+                <td>Physiology Readiness Score</td>
+                <td>64/100 (amber)</td>
+                <td>—</td>
+                <td>Physiology</td>
+              </tr>
+              <tr>
+                <td>HRV</td>
+                <td>71 ms (weekly avg and last night)</td>
+                <td>Balanced band 70–97; 5-min high 114</td>
+                <td>Physiology</td>
+              </tr>
+              <tr>
+                <td>Resting HR</td>
+                <td>55 bpm</td>
+                <td>Baseline ≈52 bpm</td>
+                <td>Physiology</td>
+              </tr>
+              <tr>
+                <td>Sleep</td>
+                <td>6.92 h; deep 0.60 h; REM 1.05 h (last night)</td>
+                <td>7-day avg 6.7 h; deep 0.76 h; restless ≈41</td>
+                <td>Physiology</td>
+              </tr>
+              <tr>
+                <td>Stress</td>
+                <td>25 (11/8 daily avg); prior day 71 (high)</td>
+                <td>Volatile rather than chronically high</td>
+                <td>Physiology</td>
+              </tr>
+              <tr>
+                <td rowspan="2"><strong>Events</strong></td>
+                <td>Tamagawa Half (B)</td>
+                <td>2025-12-07</td>
+                <td>~29 days out</td>
+                <td>Events</td>
+              </tr>
+              <tr>
+                <td>Danang 70.3 (A)</td>
+                <td>2026-05-10</td>
+                <td>~6 months out</td>
+                <td>Events</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="patterns" class="block subtle">
+          <h3>Historical Patterns by Domain</h3>
+          <details open>
+            <summary>1) Load Architecture and Progression</summary>
+            <ul>
+              <li>Deliberate wave loading: Two high exposures (ACWR 1.5 on 09/27 and 10/23) followed by ACWR 0.6–0.7 deloads (10/06–07, 10/18, 10/31–11/01), then orderly rebuilds. Net result: chronic load rose from 492 → 558 (peak 597).</li>
+              <li>Recent stability with headroom: 14-day acute mean ≈565 a.u., CV ≈20%, and current ACWR 0.8. Most days fall near the productive ACWR band (0.9–1.1), with occasional excursions to 0.7–1.3.</li>
+              <li>Risk control: Past spike magnitude reached 1.5; current plan targets ≤1.2 during build to minimize risk.</li>
+            </ul>
+          </details>
+          <details>
+            <summary>2) Execution Patterns (last 10 training days)</summary>
+            <ul>
+              <li>Overall quality: AQS 77/100, with clear interval structure and appropriate HR rise/fall on both run and bike sessions.</li>
+              <li>Intensity density: Vigorous ≈52% of training time; moderate ≈38%. Several days include vigorous-dominant doubles (e.g., 2025-11-03).</li>
+              <li>Running execution:
+                <ul>
+                  <li>2025-11-07: 2:00 on/2:00 off; HR peaks 173 bpm; off-rep HR ~161 indicates incomplete recovery within 2:00.</li>
+                  <li>2025-10-27: 1:00 on (~4:00–4:33/km) / 1:00 off (10:00–11:06/km); strong work–recovery separation; HR peaks 174.</li>
+                </ul>
+              </li>
+              <li>Cycling execution:
+                <ul>
+                  <li>2025-11-06, 11-03: Structured intervals (work 180–214 W; recovery 100–107 W), vigorous-dominant with clean HR responses.</li>
+                  <li>2025-11-01: Controlled steady aerobic ride (~103–110 W) with small finishing uptick.</li>
+                </ul>
+              </li>
+              <li>Swimming execution:
+                <ul>
+                  <li>2025-11-02: 100 m repeats around 3:00–3:20 per 100; second session heavy on micro-segments consistent with drill/technique focus.</li>
+                </ul>
+              </li>
+            </ul>
+          </details>
+          <details>
+            <summary>3) Physiological State and Responses</summary>
+            <ul>
+              <li>Current readiness: 64/100 (amber). HRV at the low edge of balanced (71 ms), intact ceiling (5-min high 114), RHR +3 vs baseline (55 bpm), and suppressed deep sleep (0.60 h last night; 0.76 h 7-day average).</li>
+              <li>Stress pattern: Volatile—high on 11/7, low on 11/8. Physiology notes that such spikes are followed by lower deep sleep and elevated RHR on subsequent nights.</li>
+              <li>No overtraining red flags: No ≥3-day HRV suppression; no progressive RHR drift; weight stable.</li>
+            </ul>
+          </details>
+          <details>
+            <summary>4) Performance Adaptations</summary>
+            <ul>
+              <li>Cycling: VO2 max improved from 44 → 46 with repeated confirmations—consistent with the structured interval execution observed.</li>
+              <li>Running: VO2 max unchanged at 44 across 17 entries (09/12–11/07) despite variable load and frequent vigorous sessions.</li>
+            </ul>
+          </details>
+        </section>
+
+        <section id="linkages" class="block subtle">
+          <h3>Integrated Load–Execution–Physiology Linkages</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Pattern observed</th>
+                <th>Supporting evidence</th>
+                <th>System response/implication</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Wave-loading with controlled deloads</td>
+                <td>ACWR spikes 1.5 (09/27, 10/23) and deloads 0.6–0.7 thereafter; chronic +13.4%</td>
+                <td>Productive base development; currently safe to build modestly (ACWR target ~0.95–1.05) if physiology permits.</td>
+              </tr>
+              <tr>
+                <td>High intensity density and doubles</td>
+                <td>52% vigorous time; vigorous-dominant run+bike day on 11/03; AQS 77 with clean structure</td>
+                <td>Maintains quality but elevates variability (14-day CV ≈20%) and coincides with amber physiology; temper density to stabilize recovery.</td>
+              </tr>
+              <tr>
+                <td>Clean interval execution; some HR carryover in run sets</td>
+                <td>HR rise/fall clear; 11/07 run shows incomplete HR reset within 2:00 recoveries</td>
+                <td>Adjust recovery spacing or on-pace to ensure HR reset, reducing stacked sympathetic load on base-focused days.</td>
+              </tr>
+              <tr>
+                <td>Modality-specific adaptation</td>
+                <td>Cycling VO2 up to 46; running VO2 flat at 44</td>
+                <td>Maintain cycling momentum efficiently; introduce run-specific quality within ACWR bounds to seek measurable change.</td>
+              </tr>
+              <tr>
+                <td>Stress volatility affecting sleep/RHR</td>
+                <td>11/7 stress high → subsequent low deep sleep and +RHR noted</td>
+                <td>Time hard sessions after “green” signals (HRV ≥71, RHR ≤52, deep ≥1.0 h) to protect adaptation efficiency.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="timeline" class="block subtle">
+          <h3>Race Timeline Context</h3>
+          <div class="grid auto">
+            <div class="block">
+              <h3>Tamagawa Half Marathon (B) — 2025-12-07 (~4 weeks out)</h3>
+              <ul>
+                <li>Metrics: Window for short, controlled build now (10–14 days), followed by a light taper (7–10 days) preserving chronic load.</li>
+                <li>Physiology: Begin threshold/long work only after one “green” night (HRV ≥71 ms, RHR ≤52, deep sleep ≥1.0 h, total sleep ≥7.2 h). Stay aerobic/technique on amber days.</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>Danang Ironman 70.3 (A) — 2026-05-10 (~6 months out)</h3>
+              <ul>
+                <li>Maintain the chronic load trajectory with gradual progression and spike control (avoid ACWR >1.3).</li>
+                <li>Leverage the cycling momentum and continue swim technique consolidation.</li>
+              </ul>
+            </div>
+          </div>
+          <details style="margin-top:10px">
+            <summary>Wave-loading timeline (spikes and deloads)</summary>
+            <div class="timeline" aria-label="Wave loading timeline">
+              <div class="t-item spike">
+                <div class="caps">2025-09-27 — Spike</div>
+                <strong>ACWR 1.5</strong> followed by controlled deloads → chronic upward trend initiated.
+              </div>
+              <div class="t-item deload">
+                <div class="caps">2025-10-06–07 — Deload</div>
+                ACWR 0.6–0.7 stabilizing recovery.
+              </div>
+              <div class="t-item deload">
+                <div class="caps">2025-10-18 — Deload</div>
+                Continued consolidation after prior spike.
+              </div>
+              <div class="t-item spike">
+                <div class="caps">2025-10-23 — Spike</div>
+                <strong>ACWR 1.5</strong> targeted shock exposure.
+              </div>
+              <div class="t-item deload">
+                <div class="caps">2025-10-31–11/01 — Deload</div>
+                ACWR 0.6–0.7 with orderly rebuilds thereafter.
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section id="guidance" class="block subtle">
+          <h3>Actionable Guidance (next 2–3 weeks)</h3>
+          <ul>
+            <li>Load targets and variability control
+              <ul>
+                <li>Build window (next 10–14 days): Move ACWR toward 0.95–1.05 by raising weekly acute from ~495 toward ~558 a.u., distributed evenly to target 14-day CV ≈ 10–15%.</li>
+                <li>Spike control: Cap ACWR ≤1.2 during the build; avoid single-day surges that could push weekly ACWR >1.3.</li>
+                <li>Taper window (final 7–10 days pre-race): Drift to ACWR ~0.85–0.90 while keeping chronic ≥90% of recent max (≥~537 a.u.).</li>
+              </ul>
+            </li>
+            <li>Run emphasis (aligned to current physiology)
+              <ul>
+                <li>On green days only: Add modest run-specific quality (e.g., aerobic tempo 20–30 min, or 2:00 on/2:00–3:00 off intervals), keeping total weekly load within ACWR targets.</li>
+                <li>On base/amber days: Maintain clarity of recovery within sessions—extend recoveries or slightly temper on-pace when HR does not reset within 2:00 (as observed on 11/07).</li>
+              </ul>
+            </li>
+            <li>Bike and swim focus
+              <ul>
+                <li>Bike: Maintain one structured interval session (similar to 11/06) and add 1 steady aerobic ride (45–75 min at previously recorded 100–130 W band) to support base without inflating variability.</li>
+                <li>Swim: Consolidate drill-heavy micro-segments into more continuous repeats (e.g., 6–10 × 100 m at ~3:05–3:15 with controlled rests), progressing to 150–200 m repeats as tolerance allows.</li>
+              </ul>
+            </li>
+            <li>Recovery gating and monitoring
+              <ul>
+                <li>Session gating: Reintroduce threshold/long work when HRV ≥71 ms, RHR ≤52 bpm, deep sleep ≥1.0 h, and total sleep ≥7.2 h; otherwise bias aerobic/technique.</li>
+                <li>Stress-aware scheduling: Avoid stacking key sessions immediately after high-stress days (e.g., day like 11/7).</li>
+                <li>Hydration logging: Improve recording on key training days to tighten the hydration–RHR–sleep feedback loop (current logs are incomplete).</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section id="bottom-line" class="block subtle">
+          <h3>Bottom Line</h3>
+          <p>
+            The athlete’s system is well-organized: a disciplined wave-loading pattern has built chronic capacity, execution quality is strong, and cycling aerobic capacity is trending up. The limiting factor at present is recovery efficiency—evidenced by amber physiology (low-edge HRV, elevated RHR, low deep sleep) amid relatively high intensity density and moderate weekly variability. The data support a short, run-leaning build now, but only when daily physiology is green. Keep ACWR in the 0.95–1.05 band, smooth day-to-day swings, and use light tapering into the half marathon to convert the current base into performance with minimal risk.
+          </p>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <div class="grid auto">
+        <div>
+          <strong>Design system:</strong> Insight‑First — contextual information hierarchy reveals the right layer at the right time: Glance → Plan → Evidence.
+        </div>
+        <div>
+          <span class="small">Legend: 🎯 goals • 📊 metrics • 🔍 analysis • 💡 tips</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

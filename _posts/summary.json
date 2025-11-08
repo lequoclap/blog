@@ -1,0 +1,33 @@
+{
+  "athlete": "Lap Le",
+  "analysis_date": "2025-11-08T13:37:39.743731",
+  "competitions": [
+    {
+      "name": "Danang Ironman 70.3 Triathlon",
+      "date": "2026-05-10",
+      "race_type": "70.3 Triathlon",
+      "priority": "A",
+      "target_time": "06:30:00"
+    },
+    {
+      "name": "Tamagawa Half marathon",
+      "date": "2025-12-07",
+      "race_type": "Half Marathon",
+      "priority": "B",
+      "target_time": "02:02:00"
+    }
+  ],
+  "total_cost_usd": 0.0,
+  "total_tokens": 0,
+  "execution_id": "cli_user_20251108_130239_complete",
+  "trace_id": "",
+  "root_run_id": "",
+  "files_generated": [
+    "analysis.html",
+    "planning.html",
+    "metrics_result.md",
+    "activity_result.md",
+    "physiology_result.md",
+    "season_plan.md"
+  ]
+}

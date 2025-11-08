@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Lap Le — Strategic Season Plan + Two-Week Block (Nov 8–21, 2025)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <style>
+    :root{
+      --bg: #ffffff;
+      --ink: #1c232b;
+      --muted: #606a76;
+      --brand: #0f7cff;
+      --card: #f7f9fc;
+      --line: #e6ebf2;
+
+      --easy: #2bb673;
+      --moderate: #f2c037;
+      --hard: #e67e22;
+      --veryhard: #e74c3c;
+
+      --p1: #1c7ed6;  /* Phase 1 */
+      --p2: #15aabf;  /* Phase 2 */
+      --p3: #2b8a3e;  /* Phase 3 */
+      --p4: #9775fa;  /* Phase 4 */
+      --p5: #d9480f;  /* Phase 5 */
+
+      --radius: 14px;
+      --shadow: 0 6px 18px rgba(0,0,0,.06);
+      --shadow-soft: 0 2px 10px rgba(0,0,0,.05);
+      --space: clamp(16px, 2vw, 22px);
+      --h1: clamp(26px, 4vw, 40px);
+      --h2: clamp(22px, 3vw, 28px);
+      --h3: clamp(18px, 2.2vw, 22px);
+      --small: 12.5px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
+      color: var(--ink);
+      background: linear-gradient(180deg, #f6f9ff 0%, #fff 280px);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    header.site-header{
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(15,124,255,.12) 0, transparent 70%), linear-gradient(135deg, #0f7cff 0%, #3e9eff 60%, #74b7ff 100%);
+      color: #fff;
+      padding: calc(var(--space) * 1.2) var(--space);
+      border-bottom: 1px solid rgba(255,255,255,.25);
+    }
+    .site-header .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      gap: 8px;
+    }
+    .site-header h1{
+      margin: 0;
+      font-size: var(--h1);
+      line-height: 1.1;
+      letter-spacing: .2px;
+    }
+    .meta{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      opacity: .95;
+      font-size: 14px;
+    }
+    .meta .pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.3);
+      backdrop-filter: blur(2px);
+    }
+    .meta strong{ font-weight: 600; }
+
+    main{ max-width: 1100px; margin: 0 auto; padding: var(--space); }
+
+    /* Sections */
+    section{ margin: 28px 0; }
+    section > header{
+      display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
+      margin-bottom: 14px;
+    }
+    section > header h2{ font-size: var(--h2); margin: 0; }
+    section > header .sub{ color: var(--muted); font-size: 14px; }
+
+    /* Cards */
+    .card{
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(16px, 1.8vw, 24px);
+    }
+    .stack{ display: grid; gap: 14px; }
+    .cluster{ display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+
+    /* Phase timeline */
+    .timeline{
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+    .track{
+      display: flex;
+      overflow: hidden;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .block{
+      position: relative;
+      padding: 10px 8px;
+      color: #fff;
+      min-width: 70px;
+      display: grid;
+      gap: 2px;
+      justify-items: start;
+    }
+    .block small{ opacity: .95; font-size: 12px; }
+    .phase-1{ background: var(--p1); }
+    .phase-2{ background: var(--p2); }
+    .phase-3{ background: var(--p3); }
+    .phase-4{ background: var(--p4); }
+    .phase-5{ background: var(--p5); }
+    .block + .block{ box-shadow: inset 1px 0 0 rgba(255,255,255,.35); }
+    .legend{
+      margin: 10px 6px 4px;
+      display: flex; flex-wrap: wrap; gap: 10px 16px;
+      list-style: none; padding: 0;
+    }
+    .legend li{ font-size: 13px; color: var(--muted); }
+    .legend .dot{
+      width: 10px; height: 10px; display: inline-block; border-radius: 50%; margin-right: 6px; vertical-align: -1px;
+    }
+
+    /* Intensity badges */
+    .badges{ display: flex; flex-wrap: wrap; gap: 6px; }
+    .badge{
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600;
+      padding: 4px 8px; border-radius: 999px;
+      background: #eef3ff; color: #2b4c7e; border: 1px solid #d8e3ff;
+      white-space: nowrap;
+    }
+    .z1, .z2{ background: color-mix(in srgb, var(--easy) 12%, #fff); color: #1f6b4a; border-color: color-mix(in srgb, var(--easy) 28%, #fff); }
+    .z3{ background: color-mix(in srgb, var(--moderate) 20%, #fff); color: #7a5a00; border-color: color-mix(in srgb, var(--moderate) 35%, #fff); }
+    .z4{ background: color-mix(in srgb, var(--hard) 22%, #fff); color: #7b3b08; border-color: color-mix(in srgb, var(--hard) 35%, #fff); }
+    .z5{ background: color-mix(in srgb, var(--veryhard) 22%, #fff); color: #7a1d18; border-color: color-mix(in srgb, var(--veryhard) 35%, #fff); }
+
+    .tone-easy{ color: var(--easy); }
+    .tone-moderate{ color: #9a7a03; }
+    .tone-hard{ color: var(--hard); }
+    .tone-veryhard{ color: var(--veryhard); }
+
+    /* Two-column responsive grid */
+    .grid{
+      display: grid;
+      gap: 18px;
+    }
+    @media (min-width: 900px){
+      .grid.cols-2{ grid-template-columns: 1.1fr .9fr; }
+      .grid.cols-3{ grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* Lists */
+    ul{ padding-left: 20px; }
+    li + li{ margin-top: 4px; }
+    .clean{ list-style: none; padding: 0; margin: 0; }
+    .kv{ display: grid; gap: 8px; }
+    .kv div{ display: grid; grid-template-columns: 160px 1fr; gap: 10px; }
+    @media (max-width: 560px){
+      .kv div{ grid-template-columns: 1fr; }
+    }
+
+    /* Details/summary */
+    details{
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+    details + details{ margin-top: 12px; }
+    summary{
+      list-style: none;
+      cursor: pointer;
+      font-weight: 600;
+      padding: 12px 14px;
+      background: #f9fbff;
+      border-bottom: 1px solid var(--line);
+    }
+    summary::marker, summary::-webkit-details-marker{ display:none; }
+    details .content{ padding: 14px; }
+    .summary-meta{ color: var(--muted); font-weight: 500; margin-left: 8px; }
+
+    /* Day cards */
+    .day{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+    .day header{
+      display: grid; gap: 6px;
+      border-bottom: 1px dashed var(--line);
+      padding-bottom: 8px; margin-bottom: 10px;
+    }
+    .day h3{ margin: 0; font-size: var(--h3); }
+    .date{ color: var(--muted); font-size: 14px; }
+    .purpose{ color: var(--muted); }
+
+    /* Checklists */
+    .tasks{ list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+    .tasks li{ background: #fbfdff; border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+    .tasks li .subtasks{ margin-top: 6px; list-style: none; padding: 0 0 0 14px; display: grid; gap: 6px; }
+    label.chk{
+      display: flex; align-items: center; gap: 10px; cursor: pointer;
+    }
+    input[type="checkbox"]{
+      width: 18px; height: 18px; accent-color: var(--brand);
+    }
+    input[type="radio"]{
+      width: 16px; height: 16px; accent-color: var(--brand);
+    }
+    .note{
+      background: #f6faf6;
+      border: 1px dashed #cfe9d6;
+      color: #355f46;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    .intensity-guidance{ font-size: 14px; color: var(--muted); }
+
+    /* Sticky quick-nav */
+    .quick-nav{
+      position: sticky; top: 0; z-index: 2;
+      background: rgba(255,255,255,.86);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: var(--shadow-soft);
+      padding: 8px;
+      overflow-x: auto;
+    }
+    .quick-nav a{
+      text-decoration: none; color: var(--ink);
+      border: 1px solid var(--line);
+      padding: 6px 10px; border-radius: 999px; background: #fff;
+      font-size: 13px; white-space: nowrap;
+    }
+    .quick-nav a:hover{ background: #f2f7ff; border-color: #cfe0ff; color: #0b4db6; }
+
+    /* Footer */
+    footer{
+      color: var(--muted);
+      font-size: 13px;
+      padding: 40px var(--space);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1>Strategic Season Plan + 14‑Day Block</h1>
+      <div class="meta">
+        <span class="pill"><strong>Athlete:</strong> Lap Le</span>
+        <span class="pill"><strong>Plan start:</strong> 2025‑11‑08</span>
+        <span class="pill"><strong>B race:</strong> Tamagawa Half Marathon — 2025‑12‑07</span>
+        <span class="pill"><strong>A race:</strong> Danang Ironman 70.3 — 2026‑05‑10</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Season Plan Overview -->
+    <section id="season-plan">
+      <header>
+        <h2>Season Plan Overview (Next 24 Weeks)</h2>
+        <div class="sub">Curved-load macrocycle with structured gates and rehearsal windows</div>
+      </header>
+
+      <div class="timeline" aria-label="24-week macrocycle with five phases">
+        <div class="track" role="img" aria-label="Phase 1 four weeks, Phase 2 two weeks, Phases 3 to 5 six weeks each">
+          <div class="block phase-1" style="width:16.666%">
+            <strong>Phase 1</strong>
+            <small>Run Sharpen + Taper</small>
+            <small>Nov 8–Dec 7</small>
+          </div>
+          <div class="block phase-2" style="width:8.333%">
+            <strong>Phase 2</strong>
+            <small>Post‑B Recovery</small>
+            <small>Dec 8–Dec 21</small>
+          </div>
+          <div class="block phase-3" style="width:25%">
+            <strong>Phase 3</strong>
+            <small>Aerobic Base I</small>
+            <small>Dec 22–Feb 2</small>
+          </div>
+          <div class="block phase-4" style="width:25%">
+            <strong>Phase 4</strong>
+            <small>Aerobic Base II</small>
+            <small>Feb 3–Mar 16</small>
+          </div>
+          <div class="block phase-5" style="width:25%">
+            <strong>Phase 5</strong>
+            <small>Early 70.3 Build</small>
+            <small>Mar 17–Apr 25</small>
+          </div>
+        </div>
+        <ul class="legend">
+          <li><span class="dot" style="background:var(--p1)"></span> Phase 1: Run Sharpen + Taper for B</li>
+          <li><span class="dot" style="background:var(--p2)"></span> Phase 2: Post‑B Recovery & Recalibration</li>
+          <li><span class="dot" style="background:var(--p3)"></span> Phase 3: Aerobic Base I — Frequency & Technique</li>
+          <li><span class="dot" style="background:var(--p4)"></span> Phase 4: Aerobic Base II — Muscular Endurance & Bricks</li>
+          <li><span class="dot" style="background:var(--p5)"></span> Phase 5: Early Race‑Specific Build for 70.3</li>
+        </ul>
+      </div>
+
+      <div class="grid cols-2">
+        <article class="card stack">
+          <h3>1) Strategic Overview</h3>
+          <ul>
+            <li><strong>Periodization (Thorsson Method):</strong> Curved-load macrocycle with early B‑race specificity (run emphasis) while maintaining triathlon frequency; then base expansion, strength‑endurance development, and early race‑specific build for the 70.3. Load in 3:1 waves (3 loading weeks, 1 deload).</li>
+            <li><strong>Anchors:</strong>
+              <ul>
+                <li>Immediate run‑sharpen + taper to respect the B race.</li>
+                <li>Post‑B recovery/reset to clear fatigue and set posture for development.</li>
+                <li>Two consecutive base blocks (frequency → capacity → muscular endurance) across all disciplines.</li>
+                <li>Early 70.3‑specific build positioning a 14‑day taper starting 2026‑04‑26.</li>
+              </ul>
+            </li>
+            <li><strong>Environmental alignment:</strong> Begin heat/humidity adaptation and fueling rehearsal in early build to match Danang’s climate.</li>
+          </ul>
+
+          <details>
+            <summary>Race‑week note (B priority) <span class="summary-meta">Volume −35–50%, retain one short HM‑pace primer 4–5 days out</span></summary>
+            <div class="content">
+              <ul>
+                <li>Reduce run volume ~35–50% vs prior peak week; include 1 short HM‑pace primer (2–3×5–6 min) 4–5 days out.</li>
+                <li>Keep swim/bike frequency but low load to aid recovery and maintain rhythm.</li>
+              </ul>
+            </div>
+          </details>
+        </article>
+
+        <article class="card stack">
+          <h3>2) Phases & Date Ranges</h3>
+          <div class="kv">
+            <div><strong>Phase 1:</strong> <span>Run Sharpen + Taper for B (2025‑11‑08 → 2025‑12‑07)</span></div>
+            <div><strong>Phase 2:</strong> <span>Post‑B Recovery & Recalibration (2025‑12‑08 → 2025‑12‑21)</span></div>
+            <div><strong>Phase 3:</strong> <span>Aerobic Base I — Frequency & Technique (2025‑12‑22 → 2026‑02‑02)</span></div>
+            <div><strong>Phase 4:</strong> <span>Aerobic Base II — Muscular Endurance & Bricks (2026‑02‑03 → 2026‑03‑16)</span></div>
+            <div><strong>Phase 5:</strong> <span>Early Race‑Specific Build for 70.3 (2026‑03‑17 → 2026‑04‑25)</span></div>
+            <div><strong>Taper:</strong> <span>Recommended 2026‑04‑26 → 2026‑05‑10 (outside this window)</span></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="grid cols-2">
+        <article class="card stack">
+          <h3>3) Phase Details</h3>
+
+          <details open>
+            <summary>Phase 1 — Run Sharpen + Taper (B Race Focus) <span class="summary-meta">2025‑11‑08 → 2025‑12‑07</span></summary>
+            <div class="content">
+              <ul>
+                <li><strong>Primary goals:</strong> Convert endurance to run efficiency/pace control for HM; maintain swim/bike frequency with reduced load.</li>
+                <li><strong>Weekly volume:</strong> 6–10 h (gradual reduction over final 10–12 days).</li>
+                <li><strong>Intensity distribution:</strong> Pyramidal ~75/20/5 (Z1–2/Z3/Z4–5). Limit high‑intensity to short, sharp touches.</li>
+                <li><strong>Key workouts:</strong>
+                  <ul>
+                    <li>Run: Long 75–100 min with HM‑pace segments early; one quality threshold/cruise; strides.</li>
+                    <li>Bike: 1–2 easy aerobic spins; optional short sweet spot early (2×10–12 min).</li>
+                    <li>Swim: 2–3 technique‑emphasis; short threshold early; taper to aerobic + drills race week.</li>
+                    <li>Strength: Light maintenance; mobility; foot/hip hygiene.</li>
+                  </ul>
+                </li>
+                <li><strong>Transition criteria → Phase 2:</strong>
+                  <ul class="clean">
+                    <li><label class="chk"><input type="checkbox" name="phase1-crit-1" value="done"> B race complete with normal post‑race soreness only.</label></li>
+                    <li><label class="chk"><input type="checkbox" name="phase1-crit-2" value="done"> No escalating niggles; tolerates easy aerobic sessions within 72 h post‑race.</label></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>Phase 2 — Post‑B Recovery & Recalibration <span class="summary-meta">2025‑12‑08 → 2025‑12‑21</span></summary>
+            <div class="content">
+              <ul>
+                <li><strong>Primary goals:</strong> Restore freshness; reintroduce strength with control.</li>
+                <li><strong>Weekly volume:</strong> Wk1: 4–8 h; Wk2: 6–10 h.</li>
+                <li><strong>Intensity:</strong> Polarized ~90/10 (nearly all easy).</li>
+                <li><strong>Key workouts:</strong> Easy aerobic + drills swim; short aerobic rides with spin‑ups; short easy runs; reintroduce strides Wk2 if fully recovered; begin 4–6 week progressive strength block (2×/wk, low reps/high quality).</li>
+                <li><strong>Transition criteria → Phase 3:</strong>
+                  <ul class="clean">
+                    <li><label class="chk"><input type="checkbox" name="phase2-crit-1" value="done"> No residual soreness; easy back‑to‑back days tolerated.</label></li>
+                    <li><label class="chk"><input type="checkbox" name="phase2-crit-2" value="done"> Basic strength patterns pain‑free; technique stable under light load.</label></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>Phase 3 — Aerobic Base I (Frequency & Technique) <span class="summary-meta">2025‑12‑22 → 2026‑02‑02</span></summary>
+            <div class="content">
+              <ul>
+                <li><strong>Primary goals:</strong> Expand aerobic capacity and frequency; establish strong technical foundation, especially swim.</li>
+                <li><strong>Weekly volume:</strong> 8–12 h.</li>
+                <li><strong>Intensity:</strong> Polarized ~85/15 (primary Z1–2 with gentle Z3 touches).</li>
+                <li><strong>Key workouts:</strong> Swim 3×/wk drills+aerobic with 1 short threshold/CSS; Bike 3×/wk aerobic, torque reps, long ride toward 2–3 h; Run 3–4×/wk easy, strides/hill sprints, 1 steady tempo 20–30 min every 1–2 weeks; Strength progressive heavy basics 2×/wk.</li>
+                <li><strong>Transition criteria → Phase 4:</strong>
+                  <ul class="clean">
+                    <li><label class="chk"><input type="checkbox" name="phase3-crit-1" value="done"> Long ride 2–3 h and long run 75–90 min with stable form and manageable RPE.</label></li>
+                    <li><label class="chk"><input type="checkbox" name="phase3-crit-2" value="done"> Swim stroke consistency into latter reps of threshold set.</label></li>
+                    <li><label class="chk"><input type="checkbox" name="phase3-crit-3" value="done"> No compounding niggles; recovery within 36–48 h after long sessions.</label></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>Phase 4 — Aerobic Base II (Muscular Endurance & Bricks) <span class="summary-meta">2026‑02‑03 → 2026‑03‑16</span></summary>
+            <div class="content">
+              <ul>
+                <li><strong>Primary goals:</strong> Build muscular endurance; begin tri‑specific integration via bricks.</li>
+                <li><strong>Weekly volume:</strong> 10–14 h.</li>
+                <li><strong>Intensity:</strong> Pyramidal ~75/20/5 (more Z3; minimal Z4–5).</li>
+                <li><strong>Key workouts:</strong> Swim CSS sets; Bike sweet spot 3×12–20 min; long ride 3–4 h biweekly; Run long 90–110 min, tempo progression, weekly short brick 15–30 min; Strength 1×/wk maintenance + light plyo if tolerated.</li>
+                <li><strong>Transition criteria → Phase 5:</strong>
+                  <ul class="clean">
+                    <li><label class="chk"><input type="checkbox" name="phase4-crit-1" value="done"> Weekly brick comfortable; nutrition/hydration tested on long sessions without GI distress.</label></li>
+                    <li><label class="chk"><input type="checkbox" name="phase4-crit-2" value="done"> Steady form during longer Z3 blocks across bike and run.</label></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>Phase 5 — Early Race‑Specific Build for 70.3 <span class="summary-meta">2026‑03‑17 → 2026‑04‑25</span></summary>
+            <div class="content">
+              <ul>
+                <li><strong>Primary goals:</strong> Consolidate half‑iron–specific durability, pacing, and fueling; rehearse race‑day execution.</li>
+                <li><strong>Weekly volume:</strong> 11–16 h (peak).</li>
+                <li><strong>Intensity:</strong> Pyramidal trending threshold ~70/25/5 (race‑pace focus; limited high‑intensity icing).</li>
+                <li><strong>Key workouts:</strong>
+                  <ul>
+                    <li>Swim: CSS sets 15–30×100; 1 continuous 2.0–3.0 km; open‑water skills.</li>
+                    <li>Bike: Weekly HIM‑pace session 2×30–45 min within 2.5–3.5 h; over/unders; long ride 3.5–4.5 h with extended steady blocks.</li>
+                    <li>Run: Weekly brick 30–60 min steady/HIM feel off bike; standalone quality 3×2–3 km at HIM pace; long run 90–110 min with last 20–40 min steady (rotate with brick emphasis).</li>
+                    <li>Strength: Maintain 1×/wk heavy‑lite; 10–15 min core/hip stability 2×/wk.</li>
+                    <li>Heat/humidity prep: 2–3×/wk controlled heat exposures; strict hydration/electrolytes; monitor recovery.</li>
+                  </ul>
+                </li>
+                <li><strong>Transition criteria → Final taper:</strong>
+                  <ul class="clean">
+                    <li><label class="chk"><input type="checkbox" name="phase5-crit-1" value="done"> Long brick completed with stable pacing and acceptable next‑day recovery.</label></li>
+                    <li><label class="chk"><input type="checkbox" name="phase5-crit-2" value="done"> Fueling plan validated in ≥2 key sessions; no unresolved niggles.</label></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </details>
+        </article>
+
+        <article class="card stack">
+          <h3>4) Microcycle & Load Management</h3>
+          <ul>
+            <li><strong>Loading rhythm:</strong> 3 weeks build + 1 week deload in Phases 3–5; Phase 1 descends (taper); Phase 2 is recovery.</li>
+            <li><strong>Deload week:</strong> Volume −25–35%, drop intensity density, keep frequency.</li>
+            <li><strong>Key‑session density:</strong> Typically 2–3 “work” sessions/week total; never stack all quality on adjacent days.</li>
+            <li><strong>Recovery anchors:</strong> ≥1 low‑load day weekly; mobility most days; prioritize sleep and fueling post long/brick sessions.</li>
+          </ul>
+
+          <h3>5) Phase Transition Gates (Summary)</h3>
+          <ul>
+            <li>Into Phase 2: B race complete; soreness resolves within 3–5 days; no new injuries.</li>
+            <li>Into Phase 3: Easy back‑to‑back aerobic days tolerated; foundational strength patterns pain‑free.</li>
+            <li>Into Phase 4: Long ride 2–3 h; long run 75–90 min without form breakdown; swim stroke stable in late reps.</li>
+            <li>Into Phase 5: Weekly brick tolerated; fueling/hydration tested; tempo/sweet spot consistent.</li>
+            <li>Into Taper (starts 2026‑04‑26): Long brick clean; no escalating aches; readiness steady.</li>
+          </ul>
+
+          <h3>6) Notes for Downstream Planners</h3>
+          <ul>
+            <li><strong>Pacing language:</strong> “HIM pace” = sustainably hard, sub‑threshold steady state appropriate for ~2.5–3 h bike and ~90 min run; translate to athlete‑specific zones.</li>
+            <li><strong>Heat strategy:</strong> Begin acclimation in Phase 5; include one weekly session mimicking Danang timing if available.</li>
+            <li><strong>Nutrition:</strong> Progressive carbohydrate practice on long rides/runs from Phase 4; finalize race nutrition in Phase 5.</li>
+            <li><strong>Equipment:</strong> Phase 5 is rehearsal window for race wheels/tires, wetsuit or swimskin, and transition flow. No major changes after taper begins.</li>
+            <li><strong>Contingency:</strong> If post‑B recovery lingers, extend Phase 2 by 1 week and compress Phase 3 by 1 week (protect load integrity vs forcing intensity).</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Two-Week Plan -->
+    <section id="two-week">
+      <header>
+        <h2>Two‑Week Plan (Nov 8–21, 2025)</h2>
+        <div class="sub">Phase 1 — Run Sharpen + Taper for B (Tamagawa Half Marathon, 2025‑12‑07)</div>
+      </header>
+
+      <nav class="quick-nav" aria-label="Jump to day">
+        <div class="cluster">
+          <a href="#day-2025-11-08">Sat 08</a>
+          <a href="#day-2025-11-09">Sun 09</a>
+          <a href="#day-2025-11-10">Mon 10</a>
+          <a href="#day-2025-11-11">Tue 11</a>
+          <a href="#day-2025-11-12">Wed 12</a>
+          <a href="#day-2025-11-13">Thu 13</a>
+          <a href="#day-2025-11-14">Fri 14</a>
+          <a href="#day-2025-11-15">Sat 15</a>
+          <a href="#day-2025-11-16">Sun 16</a>
+          <a href="#day-2025-11-17">Mon 17</a>
+          <a href="#day-2025-11-18">Tue 18</a>
+          <a href="#day-2025-11-19">Wed 19</a>
+          <a href="#day-2025-11-20">Thu 20</a>
+          <a href="#day-2025-11-21">Fri 21</a>
+        </div>
+      </nav>
+
+      <div class="grid cols-2" style="margin-top: 18px;">
+        <article class="card stack">
+          <h3>How this 14‑day block fits your season</h3>
+          <ul>
+            <li><strong>Phase:</strong> Run Sharpen + Taper for B race (Tamagawa Half Marathon, 2025‑12‑07)</li>
+            <li><strong>Intent (Thorsson):</strong> 10–14 days of controlled build with small run bias; maintain tri frequency. Keep intensity pyramidal ~75/20/5 (Z1–2/Z3/Z4–5). Avoid spikes; protect sleep/recovery.</li>
+            <li><strong>Load targets:</strong> Week 1 ≈ 7.5–9.0 h; Week 2 ≈ 8.0–9.5 h (use low end if readiness is amber). One low‑load day each week.</li>
+            <li><strong>Readiness status today:</strong> Amber — begin aerobic/technique emphasis; re‑introduce threshold only after a “green” morning.</li>
+          </ul>
+
+          <div class="badges" aria-label="Intensity color legend">
+            <span class="badge z1">Easy Z1</span>
+            <span class="badge z2">Aerobic Z2</span>
+            <span class="badge z3">Moderate Z3</span>
+            <span class="badge z4">High Z4</span>
+            <span class="badge z5">Very High Z5</span>
+          </div>
+        </article>
+
+        <article class="card stack">
+          <h3>Hydration, Fueling, and Readiness</h3>
+          <details open>
+            <summary>Daily readiness check</summary>
+            <div class="content">
+              <ul>
+                <li>HRV vs wk avg (~71 ms): Green ≥71; Amber 65–70; Red &lt;65 (2+ days)</li>
+                <li>RHR vs baseline (~52 bpm): Green ≤52; Amber 53–55; Red ≥56</li>
+                <li>Sleep: Green ≥7.2 h (deep ≥1.0 h); Amber 6.5–7.1 h or deep 0.6–0.9 h; Red &lt;6.5 h or deep &lt;0.6 h</li>
+                <li>Musculoskeletal: Green = no hotspots; Amber = mild stiffness; Red = pain altering gait</li>
+                <li>Energy/motivation: Green ≥4/5; Amber 3/5; Red ≤2/5</li>
+              </ul>
+            </div>
+          </details>
+          <details>
+            <summary>Hydration & fueling anchors</summary>
+            <div class="content">
+              <ul>
+                <li>Pre: 300–600 mg sodium + 300–500 ml fluid 60–90 min pre‑session</li>
+                <li>During: runs &gt;60 min = 30–45 g carb/h; rides &gt;90 min = 45–60 g/h; fluids 0.4–0.6 L/h</li>
+                <li>Post: 20–30 g protein + 60–90 g carb within 60 min</li>
+              </ul>
+            </div>
+          </details>
+          <details>
+            <summary>Training zones setup</summary>
+            <div class="content grid cols-2">
+              <div>
+                <strong>Run (LTHR primary, RPE backup)</strong>
+                <ul>
+                  <li class="tone-easy">Z1 Recovery: 55–75% LTHR, RPE 2–3</li>
+                  <li class="tone-easy">Z2 Aerobic: 76–85% LTHR, RPE 3–4</li>
+                  <li class="tone-moderate">Z3 Steady/Tempo: 86–90% LTHR, RPE 5–6</li>
+                  <li class="tone-hard">Z4 Threshold: 91–95% LTHR, RPE 7–8</li>
+                  <li>HM pace (block): upper Z3, RPE 6–7, HR ~85–90% LTHR</li>
+                </ul>
+              </div>
+              <div>
+                <strong>Bike (FTP, else RPE)</strong>
+                <ul>
+                  <li class="tone-easy">Z1: &lt;55% FTP, RPE 2</li>
+                  <li class="tone-easy">Z2: 56–75% FTP, RPE 3–4</li>
+                  <li class="tone-moderate">Z3: 76–90% FTP, RPE 5–6</li>
+                  <li class="tone-hard">Sweet Spot: 88–94% FTP, RPE 6–7</li>
+                  <li class="tone-veryhard">Z4: 95–105% FTP, RPE 7–8</li>
+                </ul>
+                <strong>Swim (CSS, else effort)</strong>
+                <ul>
+                  <li class="tone-easy">Z1: ≤75% CSS, RPE 2–3</li>
+                  <li class="tone-easy">Z2: 76–85% CSS, RPE 3–4</li>
+                  <li class="tone-moderate">Z3: 86–95% CSS, RPE 5–6</li>
+                  <li class="tone-hard">Z4: 96–102% CSS, RPE 7</li>
+                </ul>
+              </div>
+            </div>
+          </details>
+        </article>
+      </div>
+
+      <form class="stack" action="#" method="post" aria-label="Workout checklists">
+        <!-- Day 1 -->
+        <article class="day" id="day-2025-11-08">
+          <header>
+            <h3>Day 1 — Easy Run + Mobility</h3>
+            <div class="date">Sat 2025‑11‑08</div>
+            <div class="purpose">DAILY READINESS: Expect amber today. Proceed easy only. Purpose: Maintain run rhythm while protecting recovery.</div>
+          </header>
+
+          <div class="intensity-guidance">
+            Intensity: Run in Z2 (RPE 3–4); no faster.
+          </div>
+
+          <ul class="tasks">
+            <li>
+              <label class="chk"><input type="checkbox" name="d-2025-11-08-readiness" value="done"> Readiness check completed</label>
+            </li>
+            <li>
+              <label class="chk">
+                <input type="checkbox" name="d-2025-11-08-run" value="done">
+                Run — 35–45 min Z2 <span class="badge z2">Z2</span>
+              </label>
+              <ul class="subtasks">
+                <li><label class="chk"><input type="checkbox" name="d-2025-11-08-run-warm" value="done"> Warm‑up 10 min Z1 <span class="badge z1">Z1</span></label></li>
+              </ul>
+            </li>
+            <li>
+              <label class="chk">
+                <input type="checkbox" name="d-2025-11-08-mobility" value="done">
+                Mobility — 10–15 min hips/feet/calf + 5 min nasal‑breathing downshift
+              </label>
+            </li>
+          </ul>
+
+          <details style="margin-top:10px;">
+            <summary>Adaptation options</summary>
+            <div class="content">
+              <div class="cluster" role="radiogroup" aria-label="Adaptation path">
+                <label class="chk"><input type="radio" name="d-2025-11-08-adapt" value="green"> <span class="badge z3">Green</span> Add 4×20 s strides (90 s walk)</label>
+                <label class="chk"><input type="radio" name="d-2025-11-08-adapt" value="amber"> <span class="badge z2">Amber</span> Keep as written; no strides</label>
+                <label class="chk"><input type="radio" name="d-2025-11-08-adapt" value="red"> <span class="badge z1">Red</span> Swap for 30–40 min easy swim (Z1–Z2) or rest + mobility</label>
+              </div>
+            </div>
+          </details>
+
+          <label class="chk" style="margin-top:10px;"><input type="checkbox" name="d-2025-11-08-complete" value="done"> Mark Day 1 complete</label>
+        </article>
+
+        <!-- Day 2 -->
+        <article class="day" id="day-2025-11-09">
+          <header>
+            <h3>Day 2 — Long Run with HM‑pace touches</h3>
+            <div class="date">Sun 2025‑11‑09</div>
+            <div class="purpose">If last night deep sleep ≥1.0 h and RHR ≤52, you may add controlled HM‑pace segments. Purpose: Build endurance and introduce race‑pace feel early.</div>
+          </header>
+
+          <div class="intensity-guidance">
+            HM pace = steady, sustainable, HR 85–90% LTHR, breathe hard but controlled.
+          </div>
+
+          <ul class="tasks">
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-09-readiness" value="done"> Readiness check completed</label></li>
+            <li>
+              <label class="chk"><input type="checkbox" name="d-2025-11-09-warm" value="done"> Warm‑up 15 min Z1–Z2 + drills <span class="badge z1">Z1</span> <span class="badge z2">Z2</span></label>
+            </li>
+            <li>
+              <label class="chk"><input type="checkbox" name="d-2025-11-09-main1" value="done"> 2×10 min at HM pace (upper Z3) with 4 min Z2 between <span class="badge z3">Z3</span></label>
+              <ul class="subtasks">
+                <li><label class="chk"><input type="checkbox" name="d-2025-11-09-recov1" value="done"> Recovery 4 min Z2 between intervals <span class="badge z2">Z2</span></label></li>
+              </ul>
+            </li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-09-finish" value="done"> Z2 to finish; total 75–85 min <span class="badge z2">Z2</span></label></li>
+          </ul>
+
+          <details style="margin-top:10px;">
+            <summary>Adaptation options</summary>
+            <div class="content">
+              <div class="cluster" role="radiogroup" aria-label="Adaptation path">
+                <label class="chk"><input type="radio" name="d-2025-11-09-adapt" value="green"> <span class="badge z3">Green</span> 3×10 min HM pace (same recoveries)</label>
+                <label class="chk"><input type="radio" name="d-2025-11-09-adapt" value="amber"> <span class="badge z3">Amber</span> 2×8 min HM pace; or all Z2 for 75–80 min</label>
+                <label class="chk"><input type="radio" name="d-2025-11-09-adapt" value="red"> <span class="badge z2">Red</span> 50–60 min Z2 only, or move long run to Mon and do 40 min easy today</label>
+              </div>
+            </div>
+          </details>
+
+          <label class="chk" style="margin-top:10px;"><input type="checkbox" name="d-2025-11-09-complete" value="done"> Mark Day 2 complete</label>
+        </article>
+
+        <!-- Day 3 -->
+        <article class="day" id="day-2025-11-10">
+          <header>
+            <h3>Day 3 — Swim (technique + short CSS) + Strength maintenance</h3>
+            <div class="date">Mon 2025‑11‑10</div>
+            <div class="purpose">Lower‑load skill day. Purpose: Reinforce mechanics; light neuromuscular load.</div>
+          </header>
+
+          <div class="intensity-guidance">
+            Keep swim Z2–Z3 feel; clean strokes over speed.
+          </div>
+
+          <ul class="tasks">
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-10-readiness" value="done"> Readiness check completed</label></li>
+            <li>
+              <label class="chk"><input type="checkbox" name="d-2025-11-10-swim" value="done"> Swim 1.6–2.0 km total</label>
+              <ul class="subtasks">
+                <li><label class="chk"><input type="checkbox" name="d-2025-11-10-swim-warm" value="done"> 300 easy + drills (6×50: 25 drill/25 swim) <span class="badge z1">Z1</span> <span class="badge z2">Z2</span></label></li>
+                <li><label class="chk"><input type="checkbox" name="d-2025-11-10-swim-main" value="done"> Main: 8–10×100 at CSS effort (Z3) on 20 s rest <span class="badge z3">Z3</span></label></li>
+                <li><label class="chk"><input type="checkbox" name="d-2025-11-10-swim-cool" value="done"> 200 pull easy + 100 cooldown <span class="badge z1">Z1</span></label></li>
+              </ul>
+            </li>
+            <li>
+              <label class="chk"><input type="checkbox" name="d-2025-11-10-strength" value="done"> Strength 25–30 min: squat/hinge/push/pull/carry (3×3–5 each, RPE 6/10)</label>
+            </li>
+          </ul>
+
+          <details style="margin-top:10px;">
+            <summary>Adaptation options</summary>
+            <div class="content">
+              <div class="cluster" role="radiogroup" aria-label="Adaptation path">
+                <label class="chk"><input type="radio" name="d-2025-11-10-adapt" value="green"> <span class="badge z4">Green</span> Add 4×50 build (to Z4) before cooldown</label>
+                <label class="chk"><input type="radio" name="d-2025-11-10-adapt" value="amber"> <span class="badge z2">Amber</span> Reduce main set to 6×100; keep strength very light</label>
+                <label class="chk"><input type="radio" name="d-2025-11-10-adapt" value="red"> <span class="badge z1">Red</span> Technique‑only swim 20–30 min; skip strength</label>
+              </div>
+            </div>
+          </details>
+
+          <label class="chk" style="margin-top:10px;"><input type="checkbox" name="d-2025-11-10-complete" value="done"> Mark Day 3 complete</label>
+        </article>
+
+        <!-- Day 4 -->
+        <article class="day" id="day-2025-11-11">
+          <header>
+            <h3>Day 4 — Bike Sweet Spot (maintenance)</h3>
+            <div class="date">Tue 2025‑11‑11</div>
+            <div class="purpose">If green, this is your bike quality for the week. Purpose: Maintain cycling endurance without overtaxing.</div>
+          </header>
+
+          <div class="intensity-guidance">
+            Sweet Spot 88–92% FTP; if no power, effort you could sustain 45–60 min continuously.
+          </div>
+
+          <ul class="tasks">
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-11-readiness" value="done"> Readiness check completed</label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-11-warm" value="done"> Bike warm‑up 10–15 min progressive <span class="badge z1">Z1</span> <span class="badge z2">Z2</span></label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-11-main" value="done"> 2×12 min Sweet Spot (88–92% FTP), 6 min easy between <span class="badge z4">SS</span></label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-11-cool" value="done"> Cool‑down 10–15 min easy <span class="badge z1">Z1</span></label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-11-optional-brick" value="done"> Optional jog 10–15 min Z1–Z2 (only if legs feel springy) <span class="badge z2">Z2</span></label></li>
+          </ul>
+
+          <details style="margin-top:10px;">
+            <summary>Adaptation options</summary>
+            <div class="content">
+              <div class="cluster" role="radiogroup" aria-label="Adaptation path">
+                <label class="chk"><input type="radio" name="d-2025-11-11-adapt" value="green"> <span class="badge z4">Green</span> 3×10 min instead of 2×12</label>
+                <label class="chk"><input type="radio" name="d-2025-11-11-adapt" value="amber"> <span class="badge z3">Amber</span> 2×8–10 min; skip brick jog</label>
+                <label class="chk"><input type="radio" name="d-2025-11-11-adapt" value="red"> <span class="badge z2">Red</span> 45–60 min Z2 steady, no intervals</label>
+              </div>
+            </div>
+          </details>
+
+          <label class="chk" style="margin-top:10px;"><input type="checkbox" name="d-2025-11-11-complete" value="done"> Mark Day 4 complete</label>
+        </article>
+
+        <!-- Day 5 -->
+        <article class="day" id="day-2025-11-12">
+          <header>
+            <h3>Day 5 — Easy Run + Strides; Core/Hips (lite)</h3>
+            <div class="date">Wed 2025‑11‑12</div>
+            <div class="purpose">Check lower‑limb soreness. Purpose: Aerobic density + neuromuscular pop.</div>
+          </header>
+
+          <div class="intensity-guidance">
+            Sprints are fast feet with relaxed form; stop at first sign of tightness.
+          </div>
+
+          <ul class="tasks">
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-12-readiness" value="done"> Readiness check completed</label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-12-run" value="done"> Run 40–50 min Z2 <span class="badge z2">Z2</span></label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-12-sprints" value="done"> 6–8×10 s hill sprints, full walk‑back recovery <span class="badge z5">Neuromuscular</span></label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-12-core" value="done"> Core/hips 10–15 min (clamshells, dead bugs, side planks)</label></li>
+          </ul>
+
+          <details style="margin-top:10px;">
+            <summary>Adaptation options</summary>
+            <div class="content">
+              <div class="cluster" role="radiogroup" aria-label="Adaptation path">
+                <label class="chk"><input type="radio" name="d-2025-11-12-adapt" value="green"> <span class="badge z5">Green</span> Do all 8 hill sprints</label>
+                <label class="chk"><input type="radio" name="d-2025-11-12-adapt" value="amber"> <span class="badge z3">Amber</span> 4–6 strides on flat instead</label>
+                <label class="chk"><input type="radio" name="d-2025-11-12-adapt" value="red"> <span class="badge z2">Red</span> 30–40 min Z2 only</label>
+              </div>
+            </div>
+          </details>
+
+          <label class="chk" style="margin-top:10px;"><input type="checkbox" name="d-2025-11-12-complete" value="done"> Mark Day 5 complete</label>
+        </article>
+
+        <!-- Day 6 -->
+        <article class="day" id="day-2025-11-13">
+          <header>
+            <h3>Day 6 — Swim Short Threshold + Drills</h3>
+            <div class="date">Thu 2025‑11‑13</div>
+            <div class="purpose">Swim focus; keep overall load modest. Purpose: Improve swim speed economy.</div>
+          </header>
+
+          <div class="intensity-guidance">
+            100s are Z3–Z4 effort with clean technique; do not race them.
+          </div>
+
+          <ul class="tasks">
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-13-readiness" value="done"> Readiness check completed</label></li>
+            <li>
+              <label class="chk"><input type="checkbox" name="d-2025-11-13-swim" value="done"> Swim 1.8–2.2 km total</label>
+              <ul class="subtasks">
+                <li><label class="chk"><input type="checkbox" name="d-2025-11-13-warm" value="done"> 300 easy + 4×50 drills (catch, bodyline) <span class="badge z1">Z1</span></label></li>
+                <li><label class="chk"><input type="checkbox" name="d-2025-11-13-main" value="done"> 3×(4×100 @ CSS–CSS+5s, 15–20 s rest), 100 easy pull between sets <span class="badge z3">Z3</span> <span class="badge z4">Z4</span></label></li>
+                <li><label class="chk"><input type="checkbox" name="d-2025-11-13-cool" value="done"> 200 easy cooldown <span class="badge z1">Z1</span></label></li>
+              </ul>
+            </li>
+          </ul>
+
+          <details style="margin-top:10px;">
+            <summary>Adaptation options</summary>
+            <div class="content">
+              <div class="cluster" role="radiogroup" aria-label="Adaptation path">
+                <label class="chk"><input type="radio" name="d-2025-11-13-adapt" value="green"> <span class="badge z4">Green</span> Progress last set to CSS (Z4 feel)</label>
+                <label class="chk"><input type="radio" name="d-2025-11-13-adapt" value="amber"> <span class="badge z3">Amber</span> 2×(4×100) only</label>
+                <label class="chk"><input type="radio" name="d-2025-11-13-adapt" value="red"> <span class="badge z2">Red</span> 1200–1500 m easy skills</label>
+              </div>
+            </div>
+          </details>
+
+          <label class="chk" style="margin-top:10px;"><input type="checkbox" name="d-2025-11-13-complete" value="done"> Mark Day 6 complete</label>
+        </article>
+
+        <!-- Day 7 -->
+        <article class="day" id="day-2025-11-14">
+          <header>
+            <h3>Day 7 — Recovery Spin or Rest + Mobility</h3>
+            <div class="date">Fri 2025‑11‑14</div>
+            <div class="purpose">Low‑load anchor day. Purpose: Consolidate the build; protect sleep.</div>
+          </header>
+
+          <div class="intensity-guidance">
+            Keep HR low; should feel refreshing.
+          </div>
+
+          <ul class="tasks">
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-14-readiness" value="done"> Readiness check completed</label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-14-bike" value="done"> Bike 40–60 min Z1–low Z2 with 4×60 s spin‑ups (100–110 rpm) <span class="badge z1">Z1</span> <span class="badge z2">Z2</span></label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-14-mobility" value="done"> Mobility/breathing 10–15 min</label></li>
+          </ul>
+
+          <details style="margin-top:10px;">
+            <summary>Adaptation options</summary>
+            <div class="content">
+              <div class="cluster" role="radiogroup" aria-label="Adaptation path">
+                <label class="chk"><input type="radio" name="d-2025-11-14-adapt" value="green"> <span class="badge z2">Green</span> Do as written</label>
+                <label class="chk"><input type="radio" name="d-2025-11-14-adapt" value="amber"> <span class="badge z1">Amber</span> Rest + extended mobility 20–30 min</label>
+                <label class="chk"><input type="radio" name="d-2025-11-14-adapt" value="red"> <span class="badge z1">Red</span> Rest day preferred</label>
+              </div>
+            </div>
+          </details>
+
+          <label class="chk" style="margin-top:10px;"><input type="checkbox" name="d-2025-11-14-complete" value="done"> Mark Day 7 complete</label>
+        </article>
+
+        <!-- Day 8 -->
+        <article class="day" id="day-2025-11-15">
+          <header>
+            <h3>Day 8 — Quality Run: Cruise Intervals</h3>
+            <div class="date">Sat 2025‑11‑15</div>
+            <div class="purpose">Prefer green or strong amber. Purpose: Raise threshold feel safely for HM.</div>
+          </header>
+
+          <div class="intensity-guidance">
+            Strong but even; last rep controlled, not desperate.
+          </div>
+
+          <ul class="tasks">
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-15-readiness" value="done"> Readiness check completed</label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-15-warm" value="done"> 15 min warm‑up + drills <span class="badge z1">Z1</span> <span class="badge z2">Z2</span></label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-15-main" value="done"> 3×8 min upper Z3/low Z4, 2–3 min Z2 jog recoveries <span class="badge z3">Z3</span> <span class="badge z4">Z4</span></label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-15-cool" value="done"> 10 min Z2 cooldown <span class="badge z2">Z2</span></label></li>
+          </ul>
+
+          <details style="margin-top:10px;">
+            <summary>Adaptation options</summary>
+            <div class="content">
+              <div class="cluster" role="radiogroup" aria-label="Adaptation path">
+                <label class="chk"><input type="radio" name="d-2025-11-15-adapt" value="green"> <span class="badge z4">Green</span> 4×6–8 min (total work 24–32 min)</label>
+                <label class="chk"><input type="radio" name="d-2025-11-15-adapt" value="amber"> <span class="badge z3">Amber</span> 2×8 min or 3×6 min</label>
+                <label class="chk"><input type="radio" name="d-2025-11-15-adapt" value="red"> <span class="badge z2">Red</span> 45–55 min steady Z2</label>
+              </div>
+            </div>
+          </details>
+
+          <label class="chk" style="margin-top:10px;"><input type="checkbox" name="d-2025-11-15-complete" value="done"> Mark Day 8 complete</label>
+        </article>
+
+        <!-- Day 9 -->
+        <article class="day" id="day-2025-11-16">
+          <header>
+            <h3>Day 9 — Endurance Ride (cadence focus)</h3>
+            <div class="date">Sun 2025‑11‑16</div>
+            <div class="purpose">Check legs after yesterday; if heavy, choose amber version. Purpose: Build cycling aerobic capacity with gentle neuromuscular work.</div>
+          </header>
+
+          <div class="intensity-guidance">
+            Smooth aerobic; NP/avg power stable; breathing steady.
+          </div>
+
+          <ul class="tasks">
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-16-readiness" value="done"> Readiness check completed</label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-16-ride" value="done"> 75–90 min Z2 steady; include 4×5 min at 90–100 rpm (still Z2) with 5 min easy between <span class="badge z2">Z2</span></label></li>
+          </ul>
+
+          <details style="margin-top:10px;">
+            <summary>Adaptation options</summary>
+            <div class="content">
+              <div class="cluster" role="radiogroup" aria-label="Adaptation path">
+                <label class="chk"><input type="radio" name="d-2025-11-16-adapt" value="green"> <span class="badge z3">Green</span> Add 2×10 min upper Z2–low Z3 blocks</label>
+                <label class="chk"><input type="radio" name="d-2025-11-16-adapt" value="amber"> <span class="badge z2">Amber</span> 60–75 min Z2 only</label>
+                <label class="chk"><input type="radio" name="d-2025-11-16-adapt" value="red"> <span class="badge z1">Red</span> 40–50 min easy spin</label>
+              </div>
+            </div>
+          </details>
+
+          <label class="chk" style="margin-top:10px;"><input type="checkbox" name="d-2025-11-16-complete" value="done"> Mark Day 9 complete</label>
+        </article>
+
+        <!-- Day 10 -->
+        <article class="day" id="day-2025-11-17">
+          <header>
+            <h3>Day 10 — Swim Aerobic + Skills; Strength maintenance</h3>
+            <div class="date">Mon 2025‑11‑17</div>
+            <div class="purpose">Skill day; low sympathetic load. Purpose: Technique consolidation; maintain strength.</div>
+          </header>
+
+          <div class="intensity-guidance">
+            Swimming feels “strong aerobic,” not labored.
+          </div>
+
+          <ul class="tasks">
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-17-readiness" value="done"> Readiness check completed</label></li>
+            <li>
+              <label class="chk"><input type="checkbox" name="d-2025-11-17-swim" value="done"> Swim 1.6–2.0 km total</label>
+              <ul class="subtasks">
+                <li><label class="chk"><input type="checkbox" name="d-2025-11-17-warm" value="done"> 300 easy + 6×50 drills <span class="badge z1">Z1</span></label></li>
+                <li><label class="chk"><input type="checkbox" name="d-2025-11-17-main" value="done"> 4–6×200 @ steady Z2–Z3 (20 s rest), even splits <span class="badge z2">Z2</span> <span class="badge z3">Z3</span></label></li>
+                <li><label class="chk"><input type="checkbox" name="d-2025-11-17-builds" value="done"> 4×50 build 1–4; 100 easy <span class="badge z3">Z3</span> <span class="badge z1">Z1</span></label></li>
+              </ul>
+            </li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-17-strength" value="done"> Strength 25–30 min: hinge (RDL), split squat, row, push‑up; 3×4–6 each</label></li>
+          </ul>
+
+          <details style="margin-top:10px;">
+            <summary>Adaptation options</summary>
+            <div class="content">
+              <div class="cluster" role="radiogroup" aria-label="Adaptation path">
+                <label class="chk"><input type="radio" name="d-2025-11-17-adapt" value="green"> <span class="badge z3">Green</span> 6×200</label>
+                <label class="chk"><input type="radio" name="d-2025-11-17-adapt" value="amber"> <span class="badge z2">Amber</span> 4×200 + shorter cooldown</label>
+                <label class="chk"><input type="radio" name="d-2025-11-17-adapt" value="red"> <span class="badge z1">Red</span> Technique‑only swim 20–30 min; skip strength</label>
+              </div>
+            </div>
+          </details>
+
+          <label class="chk" style="margin-top:10px;"><input type="checkbox" name="d-2025-11-17-complete" value="done"> Mark Day 10 complete</label>
+        </article>
+
+        <!-- Day 11 -->
+        <article class="day" id="day-2025-11-18">
+          <header>
+            <h3>Day 11 — Easy Run + Strides</h3>
+            <div class="date">Tue 2025‑11‑18</div>
+            <div class="purpose">Post‑weekend check‑in. Purpose: Aerobic density and running economy.</div>
+          </header>
+
+          <div class="intensity-guidance">
+            Z2 conversational; strides relaxed‑fast with perfect form.
+          </div>
+
+          <ul class="tasks">
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-18-readiness" value="done"> Readiness check completed</label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-18-run" value="done"> 45–60 min Z2 <span class="badge z2">Z2</span></label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-18-strides" value="done"> 6×20 s strides, 80–90 s walk/jog between <span class="badge z5">Neuromuscular</span></label></li>
+          </ul>
+
+          <details style="margin-top:10px;">
+            <summary>Adaptation options</summary>
+            <div class="content">
+              <div class="cluster" role="radiogroup" aria-label="Adaptation path">
+                <label class="chk"><input type="radio" name="d-2025-11-18-adapt" value="green"> <span class="badge z3">Green</span> Include 10 min steady Z3 in the middle</label>
+                <label class="chk"><input type="radio" name="d-2025-11-18-adapt" value="amber"> <span class="badge z2">Amber</span> 40–50 min Z2, 4 strides</label>
+                <label class="chk"><input type="radio" name="d-2025-11-18-adapt" value="red"> <span class="badge z2">Red</span> 30–40 min Z2 or rest</label>
+              </div>
+            </div>
+          </details>
+
+          <label class="chk" style="margin-top:10px;"><input type="checkbox" name="d-2025-11-18-complete" value="done"> Mark Day 11 complete</label>
+        </article>
+
+        <!-- Day 12 -->
+        <article class="day" id="day-2025-11-19">
+          <header>
+            <h3>Day 12 — Bike: Aerobic Endurance + Low‑Cadence Torque</h3>
+            <div class="date">Wed 2025‑11‑19</div>
+            <div class="purpose">If legs fresh, do light muscular tension. Purpose: Maintain cycling strength without heavy metabolic cost.</div>
+          </header>
+
+          <div class="intensity-guidance">
+            Smooth torque; no grinding; HR stays in Z2–Z3.
+          </div>
+
+          <ul class="tasks">
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-19-readiness" value="done"> Readiness check completed</label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-19-warm" value="done"> Warm‑up 15 min <span class="badge z1">Z1</span> <span class="badge z2">Z2</span></label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-19-main" value="done"> 3×6 min at 60–70 rpm in upper Z2–low Z3, 4 min easy between <span class="badge z2">Z2</span> <span class="badge z3">Z3</span></label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-19-z2" value="done"> Z2 steady to total 60–75 min <span class="badge z2">Z2</span></label></li>
+          </ul>
+
+          <details style="margin-top:10px;">
+            <summary>Adaptation options</summary>
+            <div class="content">
+              <div class="cluster" role="radiogroup" aria-label="Adaptation path">
+                <label class="chk"><input type="radio" name="d-2025-11-19-adapt" value="green"> <span class="badge z3">Green</span> 4×6 min if feeling great</label>
+                <label class="chk"><input type="radio" name="d-2025-11-19-adapt" value="amber"> <span class="badge z2">Amber</span> 2×6 min; total 50–60 min</label>
+                <label class="chk"><input type="radio" name="d-2025-11-19-adapt" value="red"> <span class="badge z1">Red</span> 45–50 min Z1–Z2</label>
+              </div>
+            </div>
+          </details>
+
+          <label class="chk" style="margin-top:10px;"><input type="checkbox" name="d-2025-11-19-complete" value="done"> Mark Day 12 complete</label>
+        </article>
+
+        <!-- Day 13 -->
+        <article class="day" id="day-2025-11-20">
+          <header>
+            <h3>Day 13 — Swim Aerobic/Cadence; Strength lite</h3>
+            <div class="date">Thu 2025‑11‑20</div>
+            <div class="purpose">Swim with skill under light fatigue. Purpose: Stroke rhythm and sustainable speed.</div>
+          </header>
+
+          <div class="intensity-guidance">
+            Keep 100s controlled; last in each triplet ≈ CSS feel.
+          </div>
+
+          <ul class="tasks">
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-20-readiness" value="done"> Readiness check completed</label></li>
+            <li>
+              <label class="chk"><input type="checkbox" name="d-2025-11-20-swim" value="done"> Swim 1.6–2.0 km total</label>
+              <ul class="subtasks">
+                <li><label class="chk"><input type="checkbox" name="d-2025-11-20-warm" value="done"> 300 easy + 4×50 drills <span class="badge z1">Z1</span></label></li>
+                <li><label class="chk"><input type="checkbox" name="d-2025-11-20-main" value="done"> 12×100 as 1–3 progressive (Z2 → Z3), repeat ×4; 15–20 s rest <span class="badge z2">Z2</span> <span class="badge z3">Z3</span></label></li>
+                <li><label class="chk"><input type="checkbox" name="d-2025-11-20-pull" value="done"> 200 pull buoy easy; 100 easy <span class="badge z1">Z1</span></label></li>
+              </ul>
+            </li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-20-strength" value="done"> Strength lite 15–20 min core/hip (pallof press, side plank, hip airplane)</label></li>
+          </ul>
+
+          <details style="margin-top:10px;">
+            <summary>Adaptation options</summary>
+            <div class="content">
+              <div class="cluster" role="radiogroup" aria-label="Adaptation path">
+                <label class="chk"><input type="radio" name="d-2025-11-20-adapt" value="green"> <span class="badge z3">Green</span> Make the last 3×100 slightly faster (CSS)</label>
+                <label class="chk"><input type="radio" name="d-2025-11-20-adapt" value="amber"> <span class="badge z2">Amber</span> 8–10×100 total</label>
+                <label class="chk"><input type="radio" name="d-2025-11-20-adapt" value="red"> <span class="badge z1">Red</span> 1200–1500 m easy skills; skip strength</label>
+              </div>
+            </div>
+          </details>
+
+          <label class="chk" style="margin-top:10px;"><input type="checkbox" name="d-2025-11-20-complete" value="done"> Mark Day 13 complete</label>
+        </article>
+
+        <!-- Day 14 -->
+        <article class="day" id="day-2025-11-21">
+          <header>
+            <h3>Day 14 — Recovery Spin or Rest + Mobility</h3>
+            <div class="date">Fri 2025‑11‑21</div>
+            <div class="purpose">Low‑load anchor; end‑of‑block check. Purpose: Consolidate adaptations and set up next microcycle.</div>
+          </header>
+
+          <div class="intensity-guidance">
+            Keep genuinely easy.
+          </div>
+
+          <ul class="tasks">
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-21-readiness" value="done"> Readiness check completed</label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-21-bike" value="done"> 30–45 min Z1–low Z2 spin OR complete rest <span class="badge z1">Z1</span> <span class="badge z2">Z2</span></label></li>
+            <li><label class="chk"><input type="checkbox" name="d-2025-11-21-mobility" value="done"> 15–20 min mobility/breathing; reflect on week (RPE trends, sleep, any niggles)</label></li>
+          </ul>
+
+          <details style="margin-top:10px;">
+            <summary>Adaptation options</summary>
+            <div class="content">
+              <div class="cluster" role="radiogroup" aria-label="Adaptation path">
+                <label class="chk"><input type="radio" name="d-2025-11-21-adapt" value="green"> <span class="badge z2">Green</span> Easy spin + mobility</label>
+                <label class="chk"><input type="radio" name="d-2025-11-21-adapt" value="amber"> <span class="badge z1">Amber</span> Rest day</label>
+                <label class="chk"><input type="radio" name="d-2025-11-21-adapt" value="red"> <span class="badge z1">Red</span> Rest day</label>
+              </div>
+            </div>
+          </details>
+
+          <label class="chk" style="margin-top:10px;"><input type="checkbox" name="d-2025-11-21-complete" value="done"> Mark Day 14 complete</label>
+        </article>
+
+        <!-- Execution notes -->
+        <article class="card stack">
+          <h3>Execution notes and guardrails</h3>
+          <ul>
+            <li><strong>Intensity distribution:</strong> Keep the whole 14 days ~75/20/5 (Z1–2/Z3/Z4–5). Strides/hill sprints are short neuromuscular touches and do not add high metabolic load.</li>
+            <li><strong>Spike control:</strong> Avoid single‑day jumps &gt;20% vs typical; keep ACWR ≤1.2 during this build.</li>
+            <li><strong>Swim progress:</strong> Favor 100–200 m repeats with short rest; build continuous capacity. Technique first.</li>
+            <li><strong>Bike progress:</strong> One quality (SS or torque) per week is sufficient in this phase; the rest aerobic.</li>
+            <li><strong>Run emphasis:</strong> Two quality exposures total (long run HM segments + cruise intervals). Everything else easy with brief strides.</li>
+          </ul>
+
+          <h4>What “good” feels like by Nov 21</h4>
+          <ul>
+            <li>Long run done at steady HR with tidy form; HM‑pace segments feel measured, not frantic.</li>
+            <li>Bike SS feels controlled at RPE 6–7 with stable HR.</li>
+            <li>Swims consolidate into repeatable 100–200 m sets without form breakdown.</li>
+            <li>Sleep and RHR trend slightly better than start; no accumulating niggles.</li>
+          </ul>
+
+          <div class="note">If readiness remains amber for 2+ consecutive days, trim volume to the low end and remove the final rep in quality sessions. If red flags persist, swap quality for aerobic technique and notify the team.</div>
+        </article>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    Quiet roads, steady rhythm, and patience—the Icelandic way. We let the work gather like snowfall, one flake at a time.
+  </footer>
+</body>
+</html>
